@@ -1,4 +1,8 @@
 <template>
+<div class="title">
+
+</div>
+
 
 </template>
 <script>
@@ -13,5 +17,9 @@
 </script>
 <style scoped>
 
+.title{
+  width: 705px;
+  height: 54px;
 
+}
 </style>

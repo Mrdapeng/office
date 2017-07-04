@@ -16,8 +16,8 @@
       <li>
         <router-link to="/tab/income">财务分析</router-link>
       </li>
+      <router-view></router-view>
     </ul>
-    <router-view></router-view>
   </div>
 
 
@@ -56,8 +56,8 @@
   .tab {
     width: 100%;
     padding: 0;
-    height: 40px;
-    line-height: 40px;
+    height: 44px;
+    line-height: 44px;
     font-size: 14px;
     border-bottom: 1px solid #000;
     background: #f0f0f0;
@@ -75,12 +75,12 @@
   .tab li a.router-link-active:after {
     content: "";
     position: absolute;
-    top: 20px;
+    top: 21px;
     width: 60px;
-    height: 1px;
+    height: 2px;
     left: 50%;
     margin-left: -30px;
-    background: #000;
+    background: #979797;
 
   }
 
