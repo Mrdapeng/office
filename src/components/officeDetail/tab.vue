@@ -50,7 +50,8 @@
   .officeDetail {
     margin: 0 auto;
     width: 702px;
-    height: 341px;
+    height: 343px;
+    overflow: hidden;
     background: rgba(11, 22, 12, 0.3);
   }
 

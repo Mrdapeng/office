@@ -1,10 +1,9 @@
 <template>
 <div class="title">
-<div class="report">
+  <div class="report">
   <span>报告期:</span><span class="year">{{year}}</span>
 </div>
 </div>
-
 
 </template>
 <script>
@@ -22,15 +21,19 @@
 
 .title{
   width: 705px;
-  height: 54px;
+  height: 57px;
   text-align: left;
-  margin-left: 6px;
+  background: #fff;
+  overflow: hidden;
 }
   .report{
     font-size: 12px;
-    margin-top: 23px;
     width: 123px;
+    margin-top: 26px;
   }
+.report:first-child{
+  margin-left: 4px;
+}
   .year{
     margin-left: 8px;
   }
