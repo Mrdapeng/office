@@ -16,8 +16,9 @@
       <li>
         <router-link to="/tab/income">财务分析</router-link>
       </li>
-      <router-view></router-view>
     </ul>
+    <router-view></router-view>
+
   </div>
 
 
@@ -31,7 +32,7 @@
   }
 
 </script>
-<style >
+<style  scoped>
   * {
     padding: 0;
     margin: 0;

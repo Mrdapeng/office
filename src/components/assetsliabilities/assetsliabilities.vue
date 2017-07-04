@@ -1,5 +1,7 @@
 <template>
+<div class="title">
 
+</div>
 </template>
 <script>
     export default{
@@ -12,6 +14,9 @@
 
 </script>
 <style scoped>
-
+.title{
+  width: 704px;
+  height: 44px;
+}
 
 </style>
