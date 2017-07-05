@@ -13,8 +13,9 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/tab',
       name: tab,
+      redirect:'/tab/appraisement',
       component: tab,
       children: [
         {path: '/tab/appraisement', component: appraisement},
@@ -25,6 +26,11 @@ export default new Router({
 
 
       ]
+    },
+    {
+      path: '/',
+      redirect: '/tab/appraisement'
     }
   ]
+
 })
