@@ -189,8 +189,8 @@
     margin-top: 26px;
   }
 
-  .report:first-child {
-    margin-left: 4px;
+  li[class*='col1'] > p {
+    color: #f7b444;
   }
 
   .year {
@@ -201,7 +201,7 @@
     max-width: 710px;
     height: 238px;
     /*box-sizing: content-box;*/
-    border:1px solid #979797;
+    border: 1px solid #979797;
     overflow: hidden;
     /*margin-top: 28px;*/
     /*background: #000;*/
@@ -218,6 +218,8 @@
     float: left;
     height: 100%;
   }
+
+
 
   .detail_list li:nth-child(odd) {
     background: #f9f9f9;
