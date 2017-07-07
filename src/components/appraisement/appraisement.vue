@@ -1,124 +1,99 @@
 <template>
   <div>
-
     <div class="title">
       <div class="report">
         <span>报告期:</span><span class="year">{{year}}</span>
       </div>
     </div>
     <div class="detail">
-      <div class="pe item">
-        <ul class="detail_list">
-          <li class="col1">
-            <p>PE法</p>
-          </li>
-          <li class="col2">
-            <p>公司PE</p>
-            <P>{{officePE}}</P>
-          </li>
-          <li class="col3">
-            <p>
-              行业PE
-            </p>
-            <p>{{tradePE}}</p>
-          </li>
-          <li class="col4">
-            <p>每股收益</p>
-            <p>{{perIncome}}</p>
-          </li>
-          <li class="col5">
-            <p>行业水平对应估值</p>
-            <p>{{tradeForeCast}}元</p>
-          </li>
-        </ul>
-      </div>
-      <div class="pb item">
-        <!--<el-table-->
-        <!--:data="tableData"-->
-        <!--style="width: 340px;">-->
-        <!--<el-table-column-->
-        <!--prop="label"-->
-        <!--label=""-->
-        <!--min-width="11%">-->
-        <!--</el-table-column>-->
-        <!--<el-table-column-->
-        <!--prop="name"-->
-        <!--label=""-->
-        <!--min-width="16%">-->
-        <!--</el-table-column>-->
-        <!--<el-table-column-->
-        <!--prop="address"-->
-        <!--label=""-->
-        <!--min-width="17%"-->
-        <!--&gt;-->
-        <!--</el-table-column>-->
-        <!--<el-table-column-->
-        <!--prop="address"-->
-        <!--label=""-->
-        <!--min-width="19"-->
-        <!--&gt;-->
-        <!--</el-table-column>-->
-        <!--<el-table-column-->
-        <!--prop="address"-->
-        <!--label=""-->
-        <!--min-width="24%"-->
-        <!--&gt;-->
-        <!--</el-table-column>-->
 
-        <!--</el-table>-->
-        <ul class="detail_list">
-          <li class="col1">
-            <p>PB法</p>
-          </li>
-          <li class="col2">
-            <p>公司PB</p>
-            <span>{{officePE}}元</span>
-          </li>
-          <li class="col3">
-            <p>
-              行业PB
-            </p>
-            <p>{{tradePE}}</p>
-          </li>
-          <li class="col4">
-            <p>每股收益</p>
-            <p>{{perIncome}}</p>
-          </li>
-          <li class="col5">
-            <p>行业水平对应估值</p>
-            <p>{{tradeForeCast}}元</p>
-          </li>
-        </ul>
+      <div class="left_part">
+        <div class="pe item">
+          <ul class="detail_list">
+            <li class="col1">
+              <p>PE法</p>
+            </li>
+            <li class="col2">
+              <p>公司PE</p>
+              <P>{{officePE}}</P>
+            </li>
+            <li class="col3">
+              <p>
+                行业PE
+              </p>
+              <p>{{tradePE}}</p>
+            </li>
+            <li class="col4">
+              <p>每股收益</p>
+              <p>{{perIncome}}</p>
+            </li>
+            <li class="col5">
+              <p>行业水平对应估值</p>
+              <p>{{tradeForeCast}}元</p>
+            </li>
+          </ul>
+        </div>
+        <div class="pb item">
+          <ul class="detail_list">
+            <li class="col1">
+              <p>PB法</p>
+            </li>
+            <li class="col2">
+              <p>公司PB</p>
+              <span>{{officePE}}元</span>
+            </li>
+            <li class="col3">
+              <p>
+                行业PB
+              </p>
+              <p>{{tradePE}}</p>
+            </li>
+            <li class="col4">
+              <p>每股收益</p>
+              <p>{{perIncome}}</p>
+            </li>
+            <li class="col5">
+              <p>行业水平对应估值</p>
+              <p>{{tradeForeCast}}元</p>
+            </li>
+          </ul>
+        </div>
+        <div class="ps item">
+          <ul class="detail_list">
+            <li class="col1">
+              <p>PS法</p>
+            </li>
+            <li class="col2">
+              <p>公司PS</p>
+              <span>{{officePE}}</span>
+            </li>
+            <li class="col3">
+              <p>
+                行业PS
+              </p>
+              <p>{{tradePE}}</p>
+            </li>
+            <li class="col4">
+              <p>每股收益</p>
+              <p>{{perIncome}}</p>
+            </li>
+            <li class="col5">
+              <p>行业水平对应估值</p>
+              <p>{{tradeForeCast}}元</p>
+            </li>
+          </ul>
+        </div>
       </div>
-      <div class="ps item">
-        <ul class="detail_list">
-          <li class="col1">
-            <p>PS法</p>
-          </li>
-          <li class="col2">
-            <p>公司PS</p>
-            <span>{{officePE}}</span>
-          </li>
-          <li class="col3">
-            <p>
-              行业PS
-            </p>
-            <p>{{tradePE}}</p>
-          </li>
-          <li class="col4">
-            <p>每股收益</p>
-            <p>{{perIncome}}</p>
-          </li>
-          <li class="col5">
-            <p>行业水平对应估值</p>
-            <p>{{tradeForeCast}}元</p>
-          </li>
-        </ul>
+
+      <div class="right_part">
+        <showline></showline>
       </div>
     </div>
+
   </div>
 </template>
 <script>
+  import showline from '../line/show_line.vue'
   export default{
     data(){
       return {
@@ -134,7 +109,9 @@
         }]
       }
     },
-    components: {},
+    components: {
+      showline
+    },
     methods: {}
 
   }
@@ -179,6 +156,26 @@
     white-space: nowrap;
   }
 
+  .left_part {
+    float: left;
+    width: 372px;
+    margin-top: 28px;
+    height: 100%;
+  }
+
+  .right_part {
+    float: left;
+    width: 328px;
+    margin-top: 28px;
+    height: 100%;
+    background: #ccc;
+  }
+
+  .main {
+    width: 100%;
+    height: 242px;
+  }
+
   .item {
     width: 340px;
     height: 73px;
@@ -201,12 +198,12 @@
   }
 
   .detail {
-    width: 705px;
-    height: 242px;
-    box-sizing: content-box;
-    border: 1px solid #979797;
+    max-width: 710px;
+    height: 238px;
+    /*box-sizing: content-box;*/
+    border:1px solid #979797;
     overflow: hidden;
-    padding-top: 28px;
+    /*margin-top: 28px;*/
     /*background: #000;*/
     margin-bottom: 14px;
   }
@@ -240,7 +237,5 @@
     float: left;
   }
 
-  .el-table td {
-    white-space: nowrap;
-  }
+
 </style>

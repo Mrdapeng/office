@@ -52,7 +52,7 @@
     width: 702px;
     height: 343px;
     overflow: hidden;
-    background: rgba(11, 22, 12, 0.3);
+    /*background: rgba(11, 22, 12, 0.3);*/
   }
 
   .tab {
