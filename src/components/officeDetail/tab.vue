@@ -17,7 +17,7 @@
         <router-link to="/tab/income">财务分析</router-link>
       </li>
     </ul>
-    <router-view></router-view>
+    <router-view style="min-height: 244px;"></router-view>
 
   </div>
 
@@ -32,7 +32,7 @@
   }
 
 </script>
-<style  scoped>
+<style scoped>
   * {
     padding: 0;
     margin: 0;
@@ -49,8 +49,7 @@
 
   .officeDetail {
     margin: 0 auto;
-    width: 702px;
-    height: 343px;
+    width: 704px;
     overflow: hidden;
     /*background: rgba(11, 22, 12, 0.3);*/
   }
@@ -71,9 +70,11 @@
     white-space: normal;
     float: left;
   }
-  .tab li a.router-link-active{
+
+  .tab li a.router-link-active {
     position: relative;
   }
+
   .tab li a.router-link-active:after {
     content: "";
     position: absolute;
