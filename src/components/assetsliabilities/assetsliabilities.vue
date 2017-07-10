@@ -13,12 +13,28 @@
     </div>
     <div class="chart">
       <div class="left_chart">
-
       </div>
       <div class="right_chart">
         <div class="right_items operating">
+          <div class="operate_top">
+            <div class="operating_title">
+              <span>{{year}}</span>
+            </div>
+            <div class="show_all">
+              <span>查看全部</span>
+            </div>
+          </div>
+          <div class="lines">
+            <div class="line_items">
+              <span class="line_income">营业收入</span> <span class="line"></span><span>30亿</span>
+            </div>
+            <div class="line_items">
+              <span class="line_income">营业收入</span> <span class="line"></span><span>30亿</span>
+            </div>
+          </div>
 
         </div>
+
         <div class="right_items right_profit">
 
         </div>
@@ -35,7 +51,7 @@
      * */
     data(){
       return {
-        year: '2016年季报',
+        year: '2016年-季报',
         report_detail: '营业收入同比增长30%，行业平均增速为18%，领先于行业，营业收入同比增长30%，行业平均增速为18%，领先于行业',
         EPS: 0.56,
         EPS_RATE: '33',
@@ -118,6 +134,37 @@
     height: 92px;
     background: #3cb;
     margin-bottom: 17px;
-
   }
+
+  .operating_title {
+    float: left;
+  }
+
+  .show_all {
+    float: right;
+  }
+
+  .line_items {
+    width: 100%;
+    height: 40px;
+    line-height: 20px;
+    font-size: 12px;
+    text-align: left;
+  }
+
+  .operate_top {
+    width: 100%;
+    height: 38px;
+    line-height: 48px;
+    font-size: 0.6em;
+  }
+
+  .line {
+    display: inline-block;
+    width: 122px;
+    content: "";
+    height: 4px;
+    background: #dadada;
+  }
+
 </style>
