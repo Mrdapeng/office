@@ -56,7 +56,44 @@
           </div>
         </div>
         <div class="right_items right_profit">
+          <div class="operate_top">
+            <div class="operating_title">
+              <span>{{year}}</span>
+            </div>
+            <div class="show_all">
+              <span>查看全部</span>
+            </div>
+          </div>
+          <div class="middle">
+            <div class="bussiness_item item1">
+              <ul>
+                <li>
+                  <span>营业收入</span>
+                </li>
+                <li>
+                  <div class="line"></div>
+                </li>
+                <li>
+                  <span>{{income}}亿</span>
+                </li>
+              </ul>
+            </div>
 
+            <div class="bussiness_item item2">
+              <ul>
+                <li>
+                  <span>营业收入</span>
+                </li>
+                <li>
+                  <div class="line"></div>
+                </li>
+                <li>
+                  <span>{{income}}亿</span>
+                </li>
+              </ul>
+            </div>
+
+          </div>
         </div>
       </div>
     </div>
@@ -97,7 +134,7 @@
 
   .profit {
     width: 100%;
-    background: #000;
+    /*background: #000;*/
   }
 
   .report {
@@ -132,7 +169,7 @@
   .left_chart {
     width: 50%;
     height: 100%;
-    background: #000;
+    /*background: #000;*/
     float: left;
   }
 
@@ -140,13 +177,13 @@
     width: 50%;
     height: 100%;
     float: right;
-    background: #ccc;
+    /*background: #ccc;*/
   }
 
   .operating {
     width: 100%;
     height: 82px;
-    background: #aca;
+    /*background: #aca;*/
     margin-top: 16px;
     margin-bottom: 36px;
   }
@@ -154,7 +191,7 @@
   .right_profit {
     width: 100%;
     height: 92px;
-    background: #3cb;
+    /*background: #3cb;*/
     margin-bottom: 17px;
   }
 
@@ -202,7 +239,7 @@
     height: 25px;
     line-height: 25px;
     list-style: none;
-    background: #ccc;
+    /*background: #ccc;*/
   }
 
   .bussiness_item ul li {
@@ -217,6 +254,9 @@
     margin-top: 10px;
     background: #ffffff;
     position: relative;
+    border: 1px solid #ededed;
+    margin-left: 10px;
+    margin-right: 12px;
     left: 0;
     top: 0;
   }
