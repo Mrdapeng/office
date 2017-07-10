@@ -5,9 +5,9 @@
         <strong><span>报告期{{yearly}}年-季报</span></strong>
       </div>
       <div class="financial_analysis">
+        <p class="sub_title">财务分析</p>
         <div class="financial_items">
           <div class="small_item">
-            <p class="sub_title">财务分析</p>
             <p>ROE: {{ROE}}</p>
             <p>速动比率:{{QR}}</p>
           </div>
@@ -23,9 +23,9 @@
 
       </div>
       <div class="core_analysis">
+        <p class="sub_title">核心财务指标</p>
         <div class="financial_items">
           <div class="small_item">
-            <p class="sub_title">核心财务指标</p>
             <p>营收同比增长: {{revenue}}</p>
             <p>净利润同比增长: {{progit_up}}</p>
           </div>
@@ -45,22 +45,26 @@
       <div class="skill_item">
         <div class="skill_detail">
           <p><strong>盈利能力</strong></p>
-          <span>净利润增长率:{{ProfitGrowthRate}}%</span><span :class="quotations(ProfitGrowthRate).class">同比{{quotations(ProfitGrowthRate).text}}显著</span>
+          <span>净利润增长率:{{ProfitGrowthRate}}%</span><span
+          :class="quotations(ProfitGrowthRate).class">同比{{quotations(ProfitGrowthRate).text}}显著</span>
         </div>
         <div class="skill_detail">
           <p><strong>偿债能力</strong></p>
-          <span>流动比率:{{liquidratio}}%</span><span :class="quotations(liquidratio).class">同比{{quotations(liquidratio).text}}显著</span>
+          <span>流动比率:{{liquidratio}}%</span><span
+          :class="quotations(liquidratio).class">同比{{quotations(liquidratio).text}}显著</span>
         </div>
       </div>
       <div class="skill_item">
         <div class="skill_item">
           <div class="skill_detail">
             <p><strong>营运能力</strong></p>
-            <span>固定资产周转率:{{fixedassets}}%</span><span :class="quotations(fixedassets).class">同比{{quotations(fixedassets).text}}显著</span>
+            <span>固定资产周转率:{{fixedassets}}%</span><span
+            :class="quotations(fixedassets).class">同比{{quotations(fixedassets).text}}显著</span>
           </div>
           <div class="skill_detail">
             <p><strong>发展能力</strong></p>
-            <span>净利润同比增长:{{Netprofitrose}}%</span><span :class="quotations(Netprofitrose).class">同比{{quotations(Netprofitrose).text}}显著</span>
+            <span>净利润同比增长:{{Netprofitrose}}%</span><span
+            :class="quotations(Netprofitrose).class">同比{{quotations(Netprofitrose).text}}显著</span>
           </div>
         </div>
       </div>
@@ -114,12 +118,12 @@
         if (num >= 50) {
           return {
             text: '提高',
-            class:'red'
+            class: 'red'
           }
         } else {
           return {
             text: "下降",
-            class:'green'
+            class: 'green'
           }
         }
       }
@@ -208,7 +212,7 @@
     height: 174px;
     top: 0;
     position: absolute;
-    border:1px solid #000;
+    border: 1px solid #000;
     /*background: #ccc;*/
   }
 
