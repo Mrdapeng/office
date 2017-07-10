@@ -24,17 +24,37 @@
               <span>查看全部</span>
             </div>
           </div>
-          <div class="lines">
-            <div class="line_items">
-              <span class="line_income">营业收入</span> <span class="line"></span><span>30亿</span>
+          <div class="middle">
+            <div class="bussiness_item item1">
+              <ul>
+                <li>
+                  <span>营业收入</span>
+                </li>
+                <li>
+                  <div class="line"></div>
+                </li>
+                <li>
+                  <span>{{income}}亿</span>
+                </li>
+              </ul>
             </div>
-            <div class="line_items">
-              <span class="line_income">营业收入</span> <span class="line"></span><span>30亿</span>
+
+            <div class="bussiness_item item2">
+              <ul>
+                <li>
+                  <span>营业收入</span>
+                </li>
+                <li>
+                  <div class="line"></div>
+                </li>
+                <li>
+                  <span>{{income}}亿</span>
+                </li>
+              </ul>
             </div>
+
           </div>
-
         </div>
-
         <div class="right_items right_profit">
 
         </div>
@@ -55,6 +75,8 @@
         report_detail: '营业收入同比增长30%，行业平均增速为18%，领先于行业，营业收入同比增长30%，行业平均增速为18%，领先于行业',
         EPS: 0.56,
         EPS_RATE: '33',
+        income: 30,
+        profit: 26,
         excludingnotanboeps: '0.45',
         tanboeps: 0.34
       }
@@ -144,14 +166,6 @@
     float: right;
   }
 
-  .line_items {
-    width: 100%;
-    height: 40px;
-    line-height: 20px;
-    font-size: 12px;
-    text-align: left;
-  }
-
   .operate_top {
     width: 100%;
     height: 38px;
@@ -159,12 +173,60 @@
     font-size: 0.6em;
   }
 
-  .line {
-    display: inline-block;
-    width: 122px;
-    content: "";
-    height: 4px;
-    background: #dadada;
+  .middle {
+    height: 50px;
+    font-size: 12px;
+    position: relative;
+    left: 0;
+    top: 0;
   }
 
+  .bussiness_item {
+    position: absolute;
+    height: 25px;
+    width: 100%;
+  }
+
+  .item1 {
+    left: 0;
+    top: 0;
+  }
+
+  .item2 {
+    top: 25px;
+    left: 0;
+  }
+
+  .bussiness_item ul {
+    width: 100%;
+    height: 25px;
+    line-height: 25px;
+    list-style: none;
+    background: #ccc;
+  }
+
+  .bussiness_item ul li {
+    height: 100%;
+    float: left;
+
+  }
+
+  .line {
+    width: 141px;
+    height: 5px;
+    margin-top: 10px;
+    background: #ffffff;
+    position: relative;
+    left: 0;
+    top: 0;
+  }
+  .line::after{
+    content: "";
+    display: inline-block;
+    height: 5px;
+    width: 76px;
+    background: #dadada;
+    position: absolute;
+    left: 0;
+  }
 </style>
