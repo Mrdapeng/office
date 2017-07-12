@@ -52,7 +52,6 @@
                 </li>
               </ul>
             </div>
-
           </div>
         </div>
         <div class="right_items right_profit">
