@@ -8,10 +8,10 @@
         <router-link to="/tab/assetsliabilities">利润表</router-link>
       </li>
       <li>
-        <router-link to="/tab/cashflow">资产负债表</router-link>
+        <router-link to="/tab/debt">资产负债表</router-link>
       </li>
       <li>
-        <router-link to="/tab/financialanalysis">现金流量表</router-link>
+        <router-link to="/tab/cash">现金流量表</router-link>
       </li>
       <li>
         <router-link to="/tab/income">财务分析</router-link>
@@ -20,7 +20,6 @@
     <router-view style="min-height: 244px;"></router-view>
 
   </div>
-
 
 </template>
 <script>
