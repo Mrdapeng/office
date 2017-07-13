@@ -26,15 +26,33 @@
           <div class="property">
             <p>资产</p>
             <div class="property_item">
-              <span :style="flow">流动资产</span>
-              <span :style="unflow">流动资产</span>
+              <div class="flow" :style="getflow()">
+                <p>流动资产</p>
+                <p>({{flowpercent * 100}})%</p>
+              </div>
+              <div class="unflow" :style="getunflow()">
+                <p>非流动资产</p>
+                <p>({{unflowpercent * 100}})%</p>
+              </div>
             </div>
           </div>
           <div class="debt">
             <p>负债和所有者权益</p>
             <div class="property_item">
-              <span :style="flow">流动资产</span>
-              <span :style="unflow">流动资产</span>
+              <!--<span :style=getflow()>流动资产</span>-->
+              <!--<span :style="unflow">流动资产</span>-->
+              <div class="flow" :style="getflowdebt()">
+                <p>流动负债</p>
+                <p>({{flowdebt * 100}})%</p>
+              </div>
+              <div class="unflow" :style="getlongdebt()">
+                <p>非流动资产</p>
+                <p>({{longdebt * 100}})%</p>
+              </div>
+              <div class="unflow" :style="getowerdebt()">
+                <p>所有者权益</p>
+                <p>({{owerdebt * 100}})%</p>
+              </div>
             </div>
           </div>
         </div>
@@ -45,7 +63,6 @@
 </template>
 <script>
   export default{
-
     data(){
       return {
         season: '2016年季报',
@@ -53,21 +70,54 @@
         type: '风险型结构',
         type_detail: '流动资产<流动负债，该公司使用短期资金投资了长期资产，将面临一定的财务风险，请留意。',
         totalmoney: '854',
-        flow: {
-          height: '50px',
-          lineHeight: '50px',
-          borderRight: '82px solid #f0eeee'
+        flowpercent: 0.35,
+        unflowpercent: 0.65,
+        flowdebt: 0.3,
+        longdebt: 0.3,
+        owerdebt: 0.4,
+      }
+    },
+    methods: {
+      getflow: function () {
+        return {
+          height: this.flowpercent * 126 + 'px',
+          lineHeight: this.flowpercent * 126 + 'px',
+          borderRight: '82px solid #f0eeee',
+          borderBottom: '1px solod #fff'
 
-        },
-        unflow: {
-          height: '80px',
-          lineHeight: '80px',
+        }
+      },
+      getunflow: function () {
+        return {
+          height: this.unflowpercent * 126 + 'px',
+          lineHeight: this.unflowpercent * 126 + 'px',
           borderRight: '82px solid #bdbcbc'
+        }
+      },
+      getflowdebt: function () {
+        return {
+          height: this.flowdebt * 126. + 'px',
+          lineHeight: this.flowdebt * 126 + 'px',
+          borderLeft: '82px solid #f0eeee',
+        }
+      },
+      getlongdebt: function () {
+        return {
+          height: this.longdebt * 126 + 'px',
+          lineHeight: this.longdebt * 126 + 'px',
+          borderLeft: '82px solid #bdbcbc',
 
+        }
+      },
+      getowerdebt: function () {
+        return {
+          height: this.owerdebt * 126 + 'px',
+          lineHeight: this.owerdebt * 126 + 'px',
+          borderLeft: '82px solid #bdbcbc'
         }
       }
     },
-    methods: {}
+
   }
 
 </script>
@@ -188,20 +238,34 @@
     margin-top: 12px;
   }
 
+  .property_item p {
+    height: 12px;
+    font-size: 0.6em;
+    font-weight: 200;
+  }
+
   .property_item span {
     display: inline-block;
-    /*height: 50px;*/
-    /*line-height: 50px;*/
     position: relative;
     left: 0;
     top: 0;
   }
-  .property_item span::after{
-    position: absolute;
-    content: '38';
-    left: 50%;
-    top: 50%;
-    margin-left: -6px;
-    margin-top: -40px;
+
+  .property .flow {
+    margin-right: 6px;
   }
+
+  .property .unflow {
+    margin-right: 6px;
+  }
+
+
+  .debt .flow {
+    margin-left: 6px;
+  }
+
+  .debt .unflow {
+    margin-left: 6px;
+  }
+
 </style>
