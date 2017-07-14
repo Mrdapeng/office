@@ -13,7 +13,8 @@
 
     <div class="content">
       <div class="profit_diff">
-
+        <p>净利润及经营现金流对比</p>
+        <canvas id="diff" class="diff"></canvas>
       </div>
       <div class="report_chart">
         <div class="report_head">
@@ -33,9 +34,9 @@
           </div>
           <div class="detail">
             <div class="detail_item">
-              <p>流入30亿(+30%)</p>
-              <p>流出26亿(+90%)</p>
-              <p>进入26亿(+90%)</p>
+              <p>流入{{flowin}}亿(+{{flowin_percent}})</p>
+              <p>流出{{flowout}}亿(+{{flowout_percent}})</p>
+              <p>进入{{income}}亿(+{{income_percent}})</p>
             </div>
           </div>
         </div>
@@ -52,24 +53,69 @@
         cashincrease: 12233.34,
         percashflow: 0.85,
         peropratecash: 0.45,
+        flowin: 30,
+        flowout: 26,
+        income: 26,
+        flowin_percent: 30 + '%',
+        flowout_percent: 90 + '%',
+        income_percent: 90 + '%',
         opreate: {
           background: "#d0021b",
-          width:'30px'
+          width: '30px'
         },
         invest: {
           background: "#7ed321",
-          width:'30px'
+          width: '30px'
 
         },
         finacing: {
           background: "#d0021b",
-          width:'30px'
-
+          width: '30px'
 
         }
       }
     },
-    methods: {}
+    methods: {},
+    mounted(){
+      var data1 = [{x: 22, y: 77}, {x: 57, y: 44}, {x: 90, y: 72}, {x: 100, y: 22}, {x: 180, y: 46}, {x: 300, y: 20}]
+      var data2 = [{x: 22, y: 107}, {x: 57, y: 94}, {x: 90, y: 122}, {x: 100, y: 110}, {x: 180, y: 130}, {
+        x: 300,
+        y: 60
+      }]
+
+      var canvas = document.getElementById('diff')
+      canvas.width = 350
+      canvas.height = 206
+      var cxt = canvas.getContext('2d')
+
+      function draw_line(data) {
+        cxt.beginPath()
+
+        for (var i = 1; i < data.length; i++) {
+          cxt.moveTo(data[i - 1].x, data[i - 1].y)
+          cxt.lineTo(data[i].x, data[i].y)
+        }
+        cxt.closePath()
+        cxt.strokeStyle = '#000'
+        cxt.stroke()
+      }
+
+      function drawDetails() {
+        cxt.fillRect(179, 39, 164, 54)
+        cxt.clearRect(180,40,162,52)
+      }
+
+      drawDetails()
+      function drawText(text, x, y) {
+        cxt.font = "30px serif #000";
+        cxt.fillText(text, x, y)
+      }
+
+      draw_line(data1)
+      draw_line(data2)
+      drawText('净利润', 14, 90)
+      drawText('经营活动现金流净额', 6, 150)
+    }
   }
 
 </script>
@@ -135,7 +181,10 @@
     float: left;
     width: 50%;
     height: 100%;
-    background: #000;
+    /*background: #000;*/
+    position: relative;
+    left: 0;
+    top: 0;
   }
 
   .report_chart {
@@ -224,5 +273,14 @@
     top: 140px;
     left: 176px;
     background: #d0021b;
+  }
+
+  .profit_diff p {
+    font-size: 12px;
+    background: #d8d8d8;
+    border-radius: 6px;
+    width: 40%;
+    text-align: left;
+    text-indent: 4px;
   }
 </style>

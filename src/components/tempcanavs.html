@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+</head>
+<body>
+<canvas id="canvas" width="328" ; height="328">
+
+</canvas>
+<script>
+  var canvas = document.getElementById('canvas')
+  var cxt = canvas.getContext('2d')
+  var data = [
+    {x: 20, y: 30},
+    {x: 38, y: 50},
+    {x: 56, y: 28},
+    {x: 74, y: 59},
+    {x: 92, y: 60},
+    {x: 110, y: 55},
+    {x: 128, y: 37},
+    {x: 146, y: 62},
+    {x: 166, y: 64},
+    {x: 186, y: 71},
+    {x: 206, y: 44},
+    {x: 226, y: 57},
+  ]
+  var data2 = [
+    {x: 20, y: 50},
+    {x: 38, y: 60},
+    {x: 56, y: 68},
+    {x: 74, y: 79},
+    {x: 92, y: 82},
+    {x: 110, y: 65},
+    {x: 128, y: 77},
+    {x: 146, y: 110},
+    {x: 166, y: 140},
+    {x: 186, y: 160},
+    {x: 206, y: 170},
+    {x: 226, y: 176},
+  ]
+  var newdata = data.concat(data2.reverse());
+  function drawLine() {
+//    cxt.beginPath()
+//    cxt.moveTo(20, 20)
+//    cxt.lineTo(20, 190)
+//    cxt.moveTo(20, 190)
+//    cxt.lineTo(216, 190)
+//    cxt.strokeStyle = "#000"
+//    cxt.stroke()
+//    cxt.closePath()
+  }
+  function drawPart(data) {
+    cxt.beginPath()
+    for (var i = 1; i < data.length; i++) {
+      cxt.moveTo(data[i - 1].x, data[i - 1].y)
+      cxt.lineTo(data[i].x, data[i].y)
+      cxt.stroke()
+    }
+    cxt.closePath()
+    cxt.fillStyle = '#e00'
+    cxt.fill()
+
+  }
+  drawLine();
+  drawPart(newdata)
+</script>
+</body>
+</html>

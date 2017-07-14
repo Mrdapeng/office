@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+</body>
+<script>
+  var canvas=document.getElementById('canvas')
+  var cxt=canvas.getContext('2d')
+  cxt.beginPath()
+  cxt.moveTo(20,80)
+  cxt.lineTo(100,80)
+  cxt.lineTo(100,160)
+  cxt.lineTo(0,140)
+  cxt.closePath()
+  cxt.fillStyle='#e00'
+  cxt.fill()
+//  cxt.fillStyle='#000'
+//  cxt.fill()
+</script>
+</html>
