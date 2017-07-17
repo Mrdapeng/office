@@ -13,8 +13,13 @@
 
     <div class="content">
       <div class="profit_diff">
-        <p>净利润及经营现金流对比</p>
-        <canvas id="diff" class="diff"></canvas>
+        <p class="d">净利润及经营现金流对比</p>
+        <canvas style="我0" id="diff" class="diff"></canvas>
+        <div id="notes">
+          <p class="note_item">该报告以下科目</p>
+          <p class="note_item"> 存货的减少:-6.12亿(+213%)</p>
+          <p class="note_item">可能为净利润与经营现金流差异的主要原因</p>
+        </div>
       </div>
       <div class="report_chart">
         <div class="report_head">
@@ -82,12 +87,11 @@
         x: 300,
         y: 60
       }]
-
       var canvas = document.getElementById('diff')
       canvas.width = 350
       canvas.height = 206
       var cxt = canvas.getContext('2d')
-
+      var notes=['该报告期以下科目','存货的减少-6.12亿()','']
       function draw_line(data) {
         cxt.beginPath()
 
@@ -100,21 +104,49 @@
         cxt.stroke()
       }
 
-      function drawDetails() {
-        cxt.fillRect(179, 39, 164, 54)
-        cxt.clearRect(180,40,162,52)
+      function drawLineRect(x, y, w, h, cxt) {
+        cxt.beginPath()
+        cxt.Rect(x, y, w, h)
+        cxt.closePath()
+        cxt.stroke()
+
+
       }
 
-      drawDetails()
-      function drawText(text, x, y) {
+
+      function drawText(text, x, y, cxt) {
+        cxt.beginPath()
         cxt.font = "30px serif #000";
         cxt.fillText(text, x, y)
+        cxt.closePath()
+      }
+
+      function canvasTextAutoLine(str, canvas, initX, initY, lineHeight) {
+        var ctx = canvas.getContext("2d");
+        var lineWidth = 0;
+        var canvasWidth = c.width;
+        var lastSubStrIndex = 0;
+        for (let i = 0; i < str.length; i++) {
+          lineWidth += ctx.measureText(str[i]).width;
+          if (lineWidth > canvasWidth - initX) {//减去initX,防止边界出现的问题
+            ctx.fillText(str.substring(lastSubStrIndex, i), initX, initY);
+            initY += lineHeight;
+            lineWidth = 0;
+            lastSubStrIndex = i;
+          }
+          if (i == str.length - 1) {
+            ctx.fillText(str.substring(lastSubStrIndex, i + 1), initX, initY);
+          }
+        }
       }
 
       draw_line(data1)
       draw_line(data2)
-      drawText('净利润', 14, 90)
-      drawText('经营活动现金流净额', 6, 150)
+      drawText('净利润', 14, 90, cxt)
+      drawText('经营活动现金流净额', 6, 150, cxt)
+      cxt.beginPath()
+      cxt.closePath()
+      cxt.stroke()
     }
   }
 
@@ -134,20 +166,20 @@
   .cash {
     width: 100%;
     height: 325px;
-    background: #ccc;
+    /*background: #ccc;*/
   }
 
   .head {
     width: 100%;
     height: 81px;
-    background: #0cc;
+    /*background: #0cc;*/
   }
 
   .report {
     width: 50%;
     height: 100%;
     float: left;
-    background: #c00;
+    /*background: #c00;*/
   }
 
   .report p {
@@ -174,7 +206,7 @@
   .content {
     width: 100%;
     height: 240px;
-    background: #00f;
+    /*background: #00f;*/
   }
 
   .profit_diff {
@@ -185,13 +217,19 @@
     position: relative;
     left: 0;
     top: 0;
+    box-sizing: border-box;
+    border: 1px solid #cbcbcb;
+
   }
 
   .report_chart {
     width: 50%;
     float: right;
     height: 100%;
-    background: #ccc;
+    box-sizing: border-box;
+    border: 1px solid #cbcbcb;
+
+    /*background: #ccc;*/
   }
 
   .report_head {
@@ -260,13 +298,13 @@
   .opreate {
     top: 21px;
     left: 176px;
-    background: #d0021b;
+    /*background: #d0021b;*/
   }
 
   .invest {
     top: 80px;
     left: 146px;
-    background: green;
+    background: #7ed321;
   }
 
   .financing {
@@ -282,5 +320,21 @@
     width: 40%;
     text-align: left;
     text-indent: 4px;
+  }
+
+  #notes {
+    position: absolute;
+    left: 169px;
+    top: 158px;
+    border: 1px solid #cbcbcb;
+
+  }
+  #notes .note_item{
+    font-weight: 400;
+    margin: 0;
+    width: 174px;
+    padding: 0;
+    border-radius: 0;
+   background: #fff;
   }
 </style>
