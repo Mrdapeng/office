@@ -13,6 +13,11 @@
     </div>
     <div class="chart">
       <div class="left_chart">
+        <div class="left_chart_title">
+          <p class="grass_ratio">毛利率</p>
+          <p class="trade_ratio">净利率</p>
+        </div>
+        <canvas id="canvas"></canvas>
       </div>
       <div class="right_chart">
         <div class="right_items operating">
@@ -99,13 +104,13 @@
   </div>
 </template>
 <script>
-  export default{
+  export default {
     /*  year:年
      *   excludingnotanboeps:每股收益-扣除非常性收益
      *  tanboeps 每股收益摊薄
      *
      * */
-    data(){
+    data() {
       return {
         year: '2016年-季报',
         report_detail: '营业收入同比增长30%，行业平均增速为18%，领先于行业，营业收入同比增长30%，行业平均增速为18%，领先于行业',
@@ -117,7 +122,56 @@
         tanboeps: 0.34
       }
     },
-    methods: {}
+    methods: {},
+    mounted() {
+      var canvas = document.getElementById('canvas')
+      var context = canvas.getContext('2d')
+      var grass = [{x: 30, y: 170}, {x: 50, y: 190}, {x: 90, y: 60}, {x: 110, y: 60}, {x: 160, y: 90}, {x: 200, y: 20}]
+      var tradeGrass = [{x: 35, y: 150}, {x: 50, y: 170}, {x: 94, y: 40}, {x: 90, y: 40}, {x: 130, y: 110}, {
+        x: 180,
+        y: 20
+      }]
+      canvas.width = 350
+      canvas.height = 239
+      let width = canvas.width
+      let height = canvas.height
+      if (window.devicePixelRatio) {
+        canvas.style.width = width + 'px'
+        canvas.style.height = height + 'px'
+        canvas.height = height * window.devicePixelRatio
+        canvas.width = width * window.devicePixelRatio
+        context.scale(window.devicePixelRatio, window.devicePixelRatio)
+      }
+
+      function drawLine(cxt, data, isDash) {
+        cxt.beginPath()
+        for (let i = 1; i < data.length; i++) {
+          cxt.moveTo(data[i - 1].x, data[i - 1].y)
+          cxt.lineTo(data[i].x, data[i].y)
+        }
+        cxt.closePath()
+        if (isDash) {
+          cxt.setLineDash([5])
+        } else {
+          cxt.setLineDash([0]);
+        }
+        cxt.strokeStyle = '#ccc'
+        cxt.stroke()
+      }
+
+      function drawText(cxt, txt, x, y) {
+        cxt.beginPath()
+        cxt.font = '30px serif #000'
+        cxt.fillText(txt, x, y)
+        cxt.closePath()
+      }
+
+      drawLine(context, grass, false)
+      drawLine(context, tradeGrass, true)
+      drawText(context, '行业平均资产负债率', grass[0].x, grass[0].y + 8);
+      drawText(context, '资产负债率', tradeGrass[0].x, tradeGrass[0].y - 17);
+
+    }
   }
 
 </script>
@@ -139,7 +193,7 @@
   .report {
     display: flex;
     height: 94px;
-    background: #c00;
+    /*background: #c00;*/
     font-size: 0.8em;
   }
 
@@ -170,12 +224,19 @@
     height: 100%;
     /*background: #000;*/
     float: left;
+    box-sizing: border-box;
+    border: 1px solid #979797;
+    position: relative;
+    left: 0;
+    top: 0;
   }
 
   .right_chart {
     width: 50%;
     height: 100%;
     float: right;
+    box-sizing: border-box;
+    border: 1px solid #979797;
     /*background: #ccc;*/
   }
 
@@ -259,7 +320,8 @@
     left: 0;
     top: 0;
   }
-  .line::after{
+
+  .line::after {
     content: "";
     display: inline-block;
     height: 5px;
@@ -267,5 +329,34 @@
     background: #dadada;
     position: absolute;
     left: 0;
+  }
+
+  .grass_ratio {
+    position: relative;
+    left: 0;
+    top: 0;
+    background:#d8d8d8;
+  }
+  .grass_ratio::after{
+    content: '';
+    position: absolute;
+    border-top:9px solid #fff;
+    border-right:9px solid transparent;
+    border-left:9px solid transparent;
+    left: 56px;
+    top: 5px;
+  }
+
+  .trade_ratio {
+    border: 1px solid #ccc;
+  }
+
+  .left_chart_title {
+    width: 75px;
+    position: absolute;
+    left: 13px;
+    top: 13px;
+    font-size: 12px;
+    font-weight:400;
   }
 </style>
