@@ -14,7 +14,7 @@
     <div class="content">
       <div class="profit_diff">
         <p class="d">净利润及经营现金流对比</p>
-        <canvas style="我0" id="diff" class="diff"></canvas>
+        <canvas  id="diff" class="diff"></canvas>
         <div id="notes">
           <p class="note_item">该报告以下科目</p>
           <p class="note_item"> 存货的减少:-6.12亿(+213%)</p>
@@ -90,18 +90,28 @@
       var canvas = document.getElementById('diff')
       canvas.width = 350
       canvas.height = 206
-      var cxt = canvas.getContext('2d')
+      var context = canvas.getContext('2d')
+      let width = canvas.width
+      let height = canvas.height
+      if(window.devicePixelRatio){
+        canvas.style.width=width+'px'
+        canvas.style.height=height+'px'
+        canvas.height=height*window.devicePixelRatio
+        canvas.width=width*window.devicePixelRatio
+        context.scale(window.devicePixelRatio,window.devicePixelRatio)
+        console.log('i am run')
+      }
       var notes=['该报告期以下科目','存货的减少-6.12亿()','']
       function draw_line(data) {
-        cxt.beginPath()
+        context.beginPath()
 
         for (var i = 1; i < data.length; i++) {
-          cxt.moveTo(data[i - 1].x, data[i - 1].y)
-          cxt.lineTo(data[i].x, data[i].y)
+          context.moveTo(data[i - 1].x, data[i - 1].y)
+          context.lineTo(data[i].x, data[i].y)
         }
-        cxt.closePath()
-        cxt.strokeStyle = '#000'
-        cxt.stroke()
+        context.closePath()
+        context.strokeStyle = '#000'
+        context.stroke()
       }
 
       function drawLineRect(x, y, w, h, cxt) {
@@ -142,11 +152,11 @@
 
       draw_line(data1)
       draw_line(data2)
-      drawText('净利润', 14, 90, cxt)
-      drawText('经营活动现金流净额', 6, 150, cxt)
-      cxt.beginPath()
-      cxt.closePath()
-      cxt.stroke()
+      drawText('净利润', 14, 90, context)
+      drawText('经营活动现金流净额', 6, 150, context)
+      context.beginPath()
+      context.closePath()
+      context.stroke()
     }
   }
 
