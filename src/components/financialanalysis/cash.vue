@@ -110,7 +110,7 @@
           context.lineTo(data[i].x, data[i].y)
         }
         context.closePath()
-        context.strokeStyle = '#000'
+        context.strokeStyle = '#ccc'
         context.stroke()
       }
 

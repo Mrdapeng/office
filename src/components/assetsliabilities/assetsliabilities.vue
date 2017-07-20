@@ -14,8 +14,11 @@
     <div class="chart">
       <div class="left_chart">
         <div class="left_chart_title">
-          <p class="grass_ratio">毛利率</p>
-          <p class="trade_ratio">净利率</p>
+          <!--<p class="grass_ratio">毛利率</p>-->
+          <!--<p class="trade_ratio">净利率</p>-->
+          <select @change="render" v-model="selected" name="profit_tab" id="profit_tab">
+            <option v-for="(option,index) in details" :value="index">{{option.select}}</option>
+          </select>
         </div>
         <canvas id="canvas"></canvas>
       </div>
@@ -119,31 +122,37 @@
         income: 30,
         profit: 26,
         excludingnotanboeps: '0.45',
-        tanboeps: 0.34
+        tanboeps: 0.34,
+        selected: 0,
+        details: [
+          {
+            select: '毛利率',
+            values1: [{x: 50, y: 170}, {x: 70, y: 190}, {x: 80, y: 60}, {x: 100, y: 60}, {x: 140, y: 90}, {
+              x: 200,
+              y: 20
+            }],
+            values2: [{x: 36, y: 150}, {x: 57, y: 170}, {x: 89, y: 40}, {x: 95, y: 40}, {x: 136, y: 110}, {
+              x: 189,
+              y: 20
+            }]
+          },
+          {
+            select: '净利率',
+            values1: [{x: 35, y: 150}, {x: 50, y: 170}, {x: 94, y: 40}, {x: 90, y: 40}, {x: 130, y: 110}, {
+              x: 180,
+              y: 20
+            }],
+            values2: [{x: 30, y: 170}, {x: 50, y: 190}, {x: 90, y: 60}, {x: 110, y: 60}, {x: 160, y: 90}, {
+              x: 200,
+              y: 20
+            }],
+          }
+        ],
       }
     },
-    methods: {},
-    mounted() {
-      var canvas = document.getElementById('canvas')
-      var context = canvas.getContext('2d')
-      var grass = [{x: 30, y: 170}, {x: 50, y: 190}, {x: 90, y: 60}, {x: 110, y: 60}, {x: 160, y: 90}, {x: 200, y: 20}]
-      var tradeGrass = [{x: 35, y: 150}, {x: 50, y: 170}, {x: 94, y: 40}, {x: 90, y: 40}, {x: 130, y: 110}, {
-        x: 180,
-        y: 20
-      }]
-      canvas.width = 350
-      canvas.height = 239
-      let width = canvas.width
-      let height = canvas.height
-      if (window.devicePixelRatio) {
-        canvas.style.width = width + 'px'
-        canvas.style.height = height + 'px'
-        canvas.height = height * window.devicePixelRatio
-        canvas.width = width * window.devicePixelRatio
-        context.scale(window.devicePixelRatio, window.devicePixelRatio)
-      }
+    methods: {
 
-      function drawLine(cxt, data, isDash) {
+      drawLine: function (cxt, data, isDash) {
         cxt.beginPath()
         for (let i = 1; i < data.length; i++) {
           cxt.moveTo(data[i - 1].x, data[i - 1].y)
@@ -157,20 +166,68 @@
         }
         cxt.strokeStyle = '#ccc'
         cxt.stroke()
-      }
-
-      function drawText(cxt, txt, x, y) {
+      },
+      drawText: function (cxt, txt, x, y) {
         cxt.beginPath()
-        cxt.font = '30px serif #000'
+        cxt.font = "10px '宋体'"
         cxt.fillText(txt, x, y)
         cxt.closePath()
+      },
+      render: function () {
+        var canvas = document.getElementById('canvas')
+        var context = canvas.getContext('2d')
+        var grass = this.details[this.selected].values1
+        var tradeGrass = this.details[this.selected].values2
+        context.clearRect(0, 0, 350, 239)
+        this.drawLine(context, grass, false)
+        this.drawLine(context, tradeGrass, true)
+        this.drawText(context, this.details[this.selected].select, grass[0].x, grass[0].y + 8);
+        this.drawText(context, '行业' + this.details[this.selected].select, tradeGrass[0].x, tradeGrass[0].y - 17);
       }
-
-      drawLine(context, grass, false)
-      drawLine(context, tradeGrass, true)
-      drawText(context, '行业平均资产负债率', grass[0].x, grass[0].y + 8);
-      drawText(context, '资产负债率', tradeGrass[0].x, tradeGrass[0].y - 17);
-
+    },
+    mounted() {
+      var canvas = document.getElementById('canvas')
+      var context = canvas.getContext('2d')
+      canvas.width = 350
+      canvas.height = 239
+      let width = canvas.width
+      let height = canvas.height
+      if (window.devicePixelRatio) {
+        canvas.style.width = width + 'px'
+        canvas.style.height = height + 'px'
+        canvas.height = height * window.devicePixelRatio
+        canvas.width = width * window.devicePixelRatio
+        context.scale(window.devicePixelRatio, window.devicePixelRatio)
+      }
+      this.render()
+//      function drawLine(cxt, data, isDash) {
+//        cxt.beginPath()
+//        for (let i = 1; i < data.length; i++) {
+//          cxt.moveTo(data[i - 1].x, data[i - 1].y)
+//          cxt.lineTo(data[i].x, data[i].y)
+//        }
+//        cxt.closePath()
+//        if (isDash) {
+//          cxt.setLineDash([5])
+//        } else {
+//          cxt.setLineDash([0]);
+//        }
+//        cxt.strokeStyle = '#ccc'
+//        cxt.stroke()
+//      }
+//
+//      function drawText(cxt, txt, x, y) {
+//        cxt.beginPath()
+//        cxt.font = "10px '宋体'"
+//        cxt.fillText(txt, x, y)
+//        cxt.closePath()
+//      }
+//
+//      drawLine(context, grass, false)
+//      drawLine(context, tradeGrass, true)
+//      drawText(context, '行业', grass[0].x, grass[0].y + 8);
+//      drawText(context, '资产负债率', tradeGrass[0].x, tradeGrass[0].y - 17);
+//      console.log(this.selected)
     }
   }
 
@@ -179,6 +236,25 @@
   * {
     margin: 0;
     padding: 0;
+  }
+
+  select {
+    /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
+    /*很关键：将默认的select选择框样式清除*/
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+
+    /*在选择框的最右侧中间显示小箭头图片*/
+    background: url("http://ourjs.github.io/static/2015/arrow.png") no-repeat scroll right center #d8d8d8;
+    border-radius: 5px;
+    /*为下拉小箭头留出一点位置，避免被文字覆盖*/
+    padding-right: 14px;
+  }
+
+  /*清除ie的默认选择框样式清除，隐藏下拉箭头*/
+  select::-ms-expand {
+    display: none;
   }
 
   .title {
@@ -335,14 +411,15 @@
     position: relative;
     left: 0;
     top: 0;
-    background:#d8d8d8;
+    background: #d8d8d8;
   }
-  .grass_ratio::after{
+
+  .grass_ratio::after {
     content: '';
     position: absolute;
-    border-top:9px solid #fff;
-    border-right:9px solid transparent;
-    border-left:9px solid transparent;
+    border-top: 9px solid #fff;
+    border-right: 9px solid transparent;
+    border-left: 9px solid transparent;
     left: 56px;
     top: 5px;
   }
@@ -357,6 +434,6 @@
     left: 13px;
     top: 13px;
     font-size: 12px;
-    font-weight:400;
+    font-weight: 400;
   }
 </style>
