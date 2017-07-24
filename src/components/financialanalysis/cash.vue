@@ -99,7 +99,6 @@
         canvas.height=height*window.devicePixelRatio
         canvas.width=width*window.devicePixelRatio
         context.scale(window.devicePixelRatio,window.devicePixelRatio)
-        console.log('i am run')
       }
       var notes=['该报告期以下科目','存货的减少-6.12亿()','']
       function draw_line(data) {

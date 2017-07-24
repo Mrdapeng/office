@@ -14,8 +14,11 @@
 
       <div class="debt_chart">
         <div class="debt_title">
-          <p class="debt_ratio_title">资产负债率</p>
-          <p class="Equity_Ratio">股东权益比率</p>
+          <!--<p class="debt_ratio_title">资产负债率</p>-->
+          <!--<p class="Equity_Ratio">股东权益比率</p>-->
+          <select @change="render" v-model="selected" name="profit_tab" id="profit_tab">
+            <option v-for="(option,index) in details" :value="index">{{option.select}}</option>
+          </select>
         </div>
         <canvas id="canvas" style="border: 1px solid #979797;"></canvas>
       </div>
@@ -80,6 +83,31 @@
         flowdebt: 0.3,
         longdebt: 0.3,
         owerdebt: 0.4,
+        details: [
+          {
+            select: '资产负债率',
+            values1: [{x: 50, y: 170}, {x: 70, y: 190}, {x: 80, y: 60}, {x: 100, y: 60}, {x: 140, y: 90}, {
+              x: 200,
+              y: 20
+            }],
+            values2: [{x: 36, y: 150}, {x: 57, y: 170}, {x: 89, y: 40}, {x: 95, y: 40}, {x: 136, y: 110}, {
+              x: 189,
+              y: 20
+            }]
+          },
+          {
+            select: '行业平均资产负债率',
+            values1: [{x: 35, y: 150}, {x: 50, y: 170}, {x: 94, y: 40}, {x: 90, y: 40}, {x: 130, y: 110}, {
+              x: 180,
+              y: 20
+            }],
+            values2: [{x: 30, y: 170}, {x: 50, y: 190}, {x: 90, y: 60}, {x: 110, y: 60}, {x: 160, y: 90}, {
+              x: 200,
+              y: 20
+            }],
+          }
+        ],
+        selected: 0
       }
     },
     mounted() {
@@ -88,79 +116,22 @@
       * Industry_average
       * 资产负债率
       * */
-      var Industry_average = [{x: 30, y: 170}, {x: 60, y: 190}, {x: 89, y: 140}, {x: 110, y: 170}, {
-        x: 150,
-        y: 200
-      }, {x: 170, y: 220}, {x: 190, y: 200}, {x: 220, y: 230}]
-      var ratio_liabilities = [{x: 30, y: 140}, {x: 60, y: 150}, {x: 89, y: 110}, {x: 110, y: 160}, {
-        x: 150,
-        y: 158
-      }, {x: 170, y: 106}, {x: 190, y: 190}, {x: 220, y: 199}]
-
       var canvas = document.getElementById('canvas')
       canvas.width = 350
       canvas.height = 239
       var context = canvas.getContext('2d')
       let width = canvas.width
       let height = canvas.height
-      if(window.devicePixelRatio){
-        canvas.style.width=width+'px'
-        canvas.style.height=height+'px'
-        canvas.height=height*window.devicePixelRatio
-        canvas.width=width*window.devicePixelRatio
-        context.scale(window.devicePixelRatio,window.devicePixelRatio)
+      if (window.devicePixelRatio) {
+        canvas.style.width = width + 'px'
+        canvas.style.height = height + 'px'
+        canvas.height = height * window.devicePixelRatio
+        canvas.width = width * window.devicePixelRatio
+        context.scale(window.devicePixelRatio, window.devicePixelRatio)
         console.log('i am run')
       }
+      this.render()
 
-
-
-
-      function drawLine(data, cxt, isDash) {
-        cxt.beginPath()
-        for (let i = 1; i < data.length; i++) {
-          cxt.moveTo(data[i - 1].x, data[i - 1].y)
-          cxt.lineTo(data[i].x, data[i].y)
-        }
-        cxt.closePath()
-        if (isDash) {
-          cxt.setLineDash([5])
-        } else {
-          cxt.setLineDash([0]);
-        }
-        cxt.strokeStyle = '#b9b9d9'
-        cxt.stroke()
-
-      }
-
-
-      function drawText(cxt, txt, x, y) {
-        cxt.beginPath()
-        cxt.font = '30px serif #000'
-        cxt.fillText(txt, x, y)
-        cxt.closePath()
-      }
-
-      function getBeveling(x, y) {
-        return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
-      }
-
-      function drawDashLine(context, x1, y1, x2, y2, dashLen) {
-        dashLen = dashLen === undefined ? 5 : dashLen;
-        //得到斜边的总长度
-        var beveling = getBeveling(x2 - x1, y2 - y1);
-        //计算有多少个线段
-        var num = Math.floor(beveling / dashLen);
-
-        for (var i = 0; i < num; i++) {
-          context[i % 2 == 0 ? 'moveTo' : 'lineTo'](x1 + (x2 - x1) / num * i, y1 + (y2 - y1) / num * i);
-        }
-        context.stroke();
-      }
-
-      drawLine(Industry_average, context, false)
-      drawLine(ratio_liabilities, context, true)
-      drawText(context, '行业平均资产负债率', Industry_average[0].x, Industry_average[0].y + 8);
-      drawText(context, '资产负债率', ratio_liabilities[0].x, ratio_liabilities[0].y - 17);
     },
     methods: {
       getflow: function () {
@@ -200,9 +171,40 @@
           lineHeight: this.owerdebt * 126 + 'px',
           borderLeft: '82px solid #bdbcbc'
         }
+      },
+      drawLine: function (cxt, data, isDash) {
+        cxt.beginPath()
+        for (let i = 1; i < data.length; i++) {
+          cxt.moveTo(data[i - 1].x, data[i - 1].y)
+          cxt.lineTo(data[i].x, data[i].y)
+        }
+        if (isDash) {
+          cxt.setLineDash([5])
+        } else {
+          cxt.setLineDash([0]);
+        }
+        cxt.closePath()
+        cxt.strokeStyle = '#ccc'
+        cxt.stroke()
+      },
+      drawText: function (cxt, txt, x, y) {
+        cxt.beginPath()
+        cxt.font = "10px '宋体'"
+        cxt.fillText(txt, x, y)
+        cxt.closePath()
+      },
+      render: function () {
+        var canvas = document.getElementById('canvas')
+        var context = canvas.getContext('2d')
+        var debt = this.details[this.selected].values1
+        var gradedebt = this.details[this.selected].values2
+        context.clearRect(0, 0, 350, 239)
+        this.drawLine(context, debt, false)
+        this.drawLine(context, gradedebt, true)
+        this.drawText(context, '行业平均资产负债率', debt[0].x, debt[0].y + 8);
+        this.drawText(context, '资产负债率', gradedebt[0].x, gradedebt[0].y - 17);
       }
     },
-
   }
 
 </script>
@@ -210,6 +212,25 @@
   * {
     margin: 0;
     padding: 0;
+  }
+
+  select {
+    /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
+    /*很关键：将默认的select选择框样式清除*/
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    outline: 0;
+    /*在选择框的最右侧中间显示小箭头图片*/
+    background: url("http://ourjs.github.io/static/2015/arrow.png") no-repeat scroll right center #d8d8d8;
+    border-radius: 5px;
+    /*为下拉小箭头留出一点位置，避免被文字覆盖*/
+    padding-right: 14px;
+  }
+
+  /*清除ie的默认选择框样式清除，隐藏下拉箭头*/
+  select::-ms-expand {
+    display: none;
   }
 
   .cashflow {

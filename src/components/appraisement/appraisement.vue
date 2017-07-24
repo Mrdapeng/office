@@ -86,7 +86,8 @@
       </div>
 
       <div class="right_part">
-        <showline></showline>
+        <!--<showline></showline>-->
+        <forechart></forechart>
       </div>
     </div>
 
@@ -94,6 +95,7 @@
 </template>
 <script>
   import showline from '../line/show_line.vue'
+  import  forechart from './forecast/forecastChart.vue'
   export default{
     data(){
       return {
@@ -110,7 +112,9 @@
       }
     },
     components: {
-      showline
+      showline,
+      forechart
+
     },
     methods: {}
 
@@ -166,9 +170,8 @@
   .right_part {
     float: left;
     width: 328px;
-    margin-top: 28px;
     height: 100%;
-    background: #ccc;
+    /*background: #ccc;*/
   }
 
   .main {
